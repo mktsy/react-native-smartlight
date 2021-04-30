@@ -1,14 +1,13 @@
 import React, { Component } from 'react'
-import { Text, View, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native'
+import { View, Image, TouchableOpacity, StyleSheet, ImageBackground } from 'react-native'
 import ConsumeAPI from '../services/api'
-import { Card, ListItem, Icon } from 'react-native-elements'
+import { Card } from 'react-native-elements'
 import { Button } from 'react-native-paper'
 const offImg = './images/offimage.png'
 const whiteImg = './images/onimage.png'
 const redImg = './images/redimage.png'
 const greenImg = './images/greenimage.png'
 const blueImg = './images/blueimage.png'
-const bgImg = './images/bg.png'
 
 export default class Control extends Component {
     state = {
@@ -19,6 +18,7 @@ export default class Control extends Component {
         this.setState({
             lights: await ConsumeAPI.get('lights'),
         })
+        console.log(this.state.lights);
     }
     onOffLight = id => async () => {
         const url = 'lights/state/' + id
@@ -66,22 +66,19 @@ export default class Control extends Component {
     render() {
         return (
             <View>
-                <ImageBackground source={require(bgImg)} style={styles.bg}>
-                <View style={styles.header}>
-                    <Text style={styles.font}>   Control</Text>
-                </View>
+                <ImageBackground source={require('./images/bgcon.png')} style={styles.bg}>
                 <View style={styles.container}>
                     {
                         this.state.lights.map((data, i) => {
                             return (
 
                                 <View key={i} style={styles.box}>
-                                    <Card>
+                                    <Card styles={{ card: { backgroundColor: 'red' }}}>
                                         <Card.Title>
                                             {data.name}
                                         </Card.Title>
                                         <Card.Divider />
-                                        <View style={{flexDirection:'row'}}>
+                                        <View style={{flexDirection: 'row'}}>
                                             <TouchableOpacity onPress={this.onOffLight(data._id)}>
                                             {data.color == 'off'?<Image source={require(offImg)} style={styles.image} />:null}
                                             {data.color == '#ff0000'?<Image source={require(redImg)} style={styles.image} />:null}
@@ -105,23 +102,18 @@ export default class Control extends Component {
         )
     }
 }
-const styles = StyleSheet.create({
-    header: {
-        width: '100%',
-        height: '10%',
-        backgroundColor: '#111111',
-        justifyContent: 'center',
 
-    },
+const styles = StyleSheet.create({
     container: {
         width: '100%',
-        height: '60%',
+        height: '50%',
         flexDirection: 'row',
         flexWrap: 'wrap',
     },
     box: {
         width: '50%',
         height: '50%',
+        marginTop: 30
     },
     font: {
         fontWeight: 'bold',
@@ -136,6 +128,7 @@ const styles = StyleSheet.create({
         fontSize: 10,
         marginLeft: 10,
         justifyContent: 'center',
+        backgroundColor: '#555',
         
     },
     image: {
@@ -145,6 +138,7 @@ const styles = StyleSheet.create({
     },
     bg: {
         width: '100%',
-        height: '100%'
+        height: '100%',
+        
     }
 })
