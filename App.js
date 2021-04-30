@@ -7,28 +7,29 @@ import {createStackNavigator} from '@react-navigation/stack';
 import {Image, SafeAreaView, StatusBar, Text, View} from 'react-native';
 
 
-const Stack = createStackNavigator()
+// const Stack = createStackNavigator()
 
-function LoginScreen() {
-  return (
-    <Login />
-  )
-}
-function HomeScreen() {
-  return (
-    <Home />
-  )
-}
+// function LoginScreen() {
+//   return (
+//     <Login />
+//   )
+// }
+// function HomeScreen() {
+//   return (
+//     <Home />
+//   )
+// }
 
 export default function App() {
   return (
     
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="Smart Lighting" component={LoginScreen}/>
-        <Stack.Screen name="Home" component={HomeScreen} />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Home />
+    // <NavigationContainer>
+    //   <Stack.Navigator>
+    //     <Stack.Screen name="Smart Lighting" component={LoginScreen}/>
+    //     <Stack.Screen name="Home" component={HomeScreen} />
+    //   </Stack.Navigator>
+    // </NavigationContainer>
     
   );
 }
